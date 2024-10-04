@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.util.Set;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -224,6 +225,8 @@ public class SourceHttpMessageConverter<T extends Source> extends AbstractHttpMe
 				this.saxParserFactory = parserFactory;
 			}
 			SAXParser saxParser = parserFactory.newSAXParser();
+			saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+			saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 			XMLReader xmlReader = saxParser.getXMLReader();
 			if (!isProcessExternalEntities()) {
 				xmlReader.setEntityResolver(NO_OP_ENTITY_RESOLVER);

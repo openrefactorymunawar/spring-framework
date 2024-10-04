@@ -611,6 +611,8 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 			this.schemaParserFactory = saxParserFactory;
 		}
 		SAXParser saxParser = saxParserFactory.newSAXParser();
+		saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+		saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 		XMLReader xmlReader = saxParser.getXMLReader();
 
 		for (int i = 0; i < resources.length; i++) {
@@ -621,6 +623,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 		}
 
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(schemaLanguage);
+		schemaFactory.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 		if (this.schemaResourceResolver != null) {
 			schemaFactory.setResourceResolver(this.schemaResourceResolver);
 		}
@@ -919,6 +922,7 @@ public class Jaxb2Marshaller implements MimeMarshaller, MimeUnmarshaller, Generi
 					this.sourceParserFactory = saxParserFactory;
 				}
 				SAXParser saxParser = saxParserFactory.newSAXParser();
+				saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_DTD, "");
 				xmlReader = saxParser.getXMLReader();
 			}
 			if (!isProcessExternalEntities()) {

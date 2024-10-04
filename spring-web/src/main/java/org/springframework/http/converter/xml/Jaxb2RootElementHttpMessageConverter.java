@@ -18,6 +18,7 @@ package org.springframework.http.converter.xml;
 
 import java.io.StringReader;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -175,6 +176,7 @@ public class Jaxb2RootElementHttpMessageConverter extends AbstractJaxb2HttpMessa
 					this.sourceParserFactory = saxParserFactory;
 				}
 				SAXParser saxParser = saxParserFactory.newSAXParser();
+				saxParser.setProperty(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 				XMLReader xmlReader = saxParser.getXMLReader();
 				if (!isProcessExternalEntities()) {
 					xmlReader.setEntityResolver(NO_OP_ENTITY_RESOLVER);

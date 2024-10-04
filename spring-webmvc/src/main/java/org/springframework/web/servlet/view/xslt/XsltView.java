@@ -23,6 +23,7 @@ import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.xml.XMLConstants;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
@@ -215,7 +216,10 @@ public class XsltView extends AbstractUrlBasedView {
 			}
 		}
 		else {
-			return TransformerFactory.newInstance();
+			TransformerFactory factory = TransformerFactory.newDefaultInstance();
+			factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+			factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "all");
+			return factory;
 		}
 	}
 
